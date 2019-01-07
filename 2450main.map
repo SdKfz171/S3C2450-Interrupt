@@ -1,0 +1,202 @@
+Archive member included because of file (symbol)
+
+/root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+                              Main.o (__aeabi_idiv)
+/root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_dvmd_tls.o)
+                              /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o) (__aeabi_idiv0)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+CODE             0x30000000         0x04000000         rw
+_ISR_START       0x33ffff00         0x00000100         rw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x30000000      0xdec
+ *s3c2450_startup.o(.text)
+ .text          0x30000000      0x290 s3c2450_startup.o
+                0x30000000                _start
+                0x300000b0                ResetHandler
+                0x30000184                IsrIRQ
+ *(.text)
+ .text          0x30000290      0xa10 Main.o
+                0x30000290                pow
+                0x30000314                sqrt
+                0x30000384                swap
+                0x3000043c                itoa
+                0x30000528                atoi
+                0x30000590                putstr
+                0x3000061c                getchar_
+                0x30000670                getstr
+                0x30000750                Uart_Init
+                0x30000810                gpio_init
+                0x300008f8                exti_init
+                0x300009ec                timer0_init
+                0x30000a78                delay_us
+                0x30000b14                delay_ms
+                0x30000b58                Main
+                0x30000c00                isr_eint_0
+                0x30000c50                isr_eint_1
+ .text          0x30000ca0      0x148 /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+                0x30000ca0                __aeabi_idiv
+                0x30000ca0                __divsi3
+                0x30000dc8                __aeabi_idivmod
+ .text          0x30000de8        0x4 /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_dvmd_tls.o)
+                0x30000de8                __aeabi_ldiv0
+                0x30000de8                __aeabi_idiv0
+                0x30000dec                . = ALIGN (0x4)
+
+.glue_7         0x30000dec        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x30000dec        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x30000dec        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x30000dec        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.rodata         0x30000dec       0x24
+                0x30000dec                rodata_start_addr = .
+ *(.rodata)
+ .rodata        0x30000dec       0x24 Main.o
+ *(.rodata.*)
+                0x30000e10                . = ALIGN (0x4)
+                0x30000e10                rodata_end_addr = .
+
+.data           0x30000e10        0x8
+                0x30000e10                data_start_addr = .
+                0x30000e10                __DATA_START__ = .
+ *(.data)
+ .data          0x30000e10        0x0 s3c2450_startup.o
+ .data          0x30000e10        0x4 Main.o
+                0x30000e10                mutex
+ .data          0x30000e14        0x0 /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+ .data          0x30000e14        0x0 /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_dvmd_tls.o)
+ *(.data.*)
+                0x30000e18                . = ALIGN (0x8)
+ *fill*         0x30000e14        0x4 00
+                0x30000e18                data_end_addr = .
+                0x30000e18                __DATA_END__ = .
+
+.bss            0x30000e18        0x8
+                0x30000e18                bss_start_addr = .
+                0x30000e18                __BSS_START__ = .
+ *(.bss)
+ .bss           0x30000e18        0x0 s3c2450_startup.o
+ .bss           0x30000e18        0x8 Main.o
+                0x30000e18                RX_Count
+                0x30000e1c                time_count
+ .bss           0x30000e20        0x0 /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+ .bss           0x30000e20        0x0 /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_dvmd_tls.o)
+ *(.bss.*)
+ *(COMMON)
+                0x30000e20                . = ALIGN (0x8)
+                0x30000e20                bss_end_addr = .
+                0x30000e20                __BSS_END__ = .
+                0x30000e20                end = .
+                0x30000e20                PROVIDE (end, .)
+
+.int_vec        0x33ffff00       0x24
+ s3c2450_startup.o(int_vect)
+ int_vect       0x33ffff00       0x24 s3c2450_startup.o
+LOAD Main.o
+LOAD s3c2450_startup.o
+LOAD /root/arm-2011.03/arm-none-eabi/lib/libc.a
+LOAD /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a
+LOAD /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a
+OUTPUT(MDS2450 elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x28
+ .ARM.attributes
+                0x00000000       0x1c s3c2450_startup.o
+ .ARM.attributes
+                0x0000001c       0x2c Main.o
+ .ARM.attributes
+                0x00000048       0x1a /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x00000062       0x18 /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_dvmd_tls.o)
+
+.comment        0x00000000       0x2a
+ .comment       0x00000000       0x2a Main.o
+                                 0x2b (size before relaxing)
+
+.debug_line     0x00000000      0x1d2
+ .debug_line    0x00000000       0xa9 s3c2450_startup.o
+ .debug_line    0x000000a9      0x129 Main.o
+
+.debug_info     0x00000000      0x70e
+ .debug_info    0x00000000       0x48 s3c2450_startup.o
+ .debug_info    0x00000048      0x6c6 Main.o
+
+.debug_abbrev   0x00000000      0x217
+ .debug_abbrev  0x00000000       0x14 s3c2450_startup.o
+ .debug_abbrev  0x00000014      0x203 Main.o
+
+.debug_aranges  0x00000000       0x40
+ .debug_aranges
+                0x00000000       0x20 s3c2450_startup.o
+ .debug_aranges
+                0x00000020       0x20 Main.o
+
+.debug_loc      0x00000000      0x2ec
+ .debug_loc     0x00000000      0x2ec Main.o
+
+.debug_pubnames
+                0x00000000      0x102
+ .debug_pubnames
+                0x00000000      0x102 Main.o
+
+.debug_pubtypes
+                0x00000000       0x4a
+ .debug_pubtypes
+                0x00000000       0x4a Main.o
+
+.debug_str      0x00000000      0x226
+ .debug_str     0x00000000      0x226 Main.o
+                                0x265 (size before relaxing)
+
+.debug_frame    0x00000000      0x260
+ .debug_frame   0x00000000      0x240 Main.o
+ .debug_frame   0x00000240       0x20 /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+
+Cross Reference Table
+
+Symbol                                            File
+IsrIRQ                                            s3c2450_startup.o
+Main                                              Main.o
+                                                  s3c2450_startup.o
+RX_Count                                          Main.o
+ResetHandler                                      s3c2450_startup.o
+Uart_Init                                         Main.o
+__aeabi_idiv                                      /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+                                                  Main.o
+__aeabi_idiv0                                     /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_dvmd_tls.o)
+                                                  /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+__aeabi_idivmod                                   /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+__aeabi_ldiv0                                     /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_dvmd_tls.o)
+__divsi3                                          /root/arm-2011.03/lib/gcc/arm-none-eabi/4.5.2/libgcc.a(_divsi3.o)
+_start                                            s3c2450_startup.o
+atoi                                              Main.o
+delay_ms                                          Main.o
+delay_us                                          Main.o
+exti_init                                         Main.o
+getchar_                                          Main.o
+getstr                                            Main.o
+gpio_init                                         Main.o
+isr_eint_0                                        Main.o
+isr_eint_1                                        Main.o
+itoa                                              Main.o
+mutex                                             Main.o
+pow                                               Main.o
+putstr                                            Main.o
+sqrt                                              Main.o
+swap                                              Main.o
+time_count                                        Main.o
+timer0_init                                       Main.o
