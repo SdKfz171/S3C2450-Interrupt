@@ -11,20 +11,34 @@
 #include "2450addr.h"
 
 typedef struct {
-    unsigned char bit1   : 4;
-    unsigned char bit2   : 4;
-    unsigned char bit3   : 8;
+    unsigned char GPIO_PIN_0    : 1;
+    unsigned char GPIO_PIN_1    : 1;
+    unsigned char GPIO_PIN_2    : 1;
+    unsigned char GPIO_PIN_3    : 1;
+    unsigned char LED           : 4;
+//     unsigned char GPIO_PIN_4    : 1;
+//     unsigned char GPIO_PIN_5    : 1;
+//     unsigned char GPIO_PIN_6    : 1;
+//     unsigned char GPIO_PIN_7    : 1;
+    unsigned char GPIO_PIN_8    : 1;
+    unsigned char GPIO_PIN_9    : 1;
+    unsigned char GPIO_PIN_10   : 1;
+    unsigned char GPIO_PIN_11   : 1;
+    unsigned char GPIO_PIN_12   : 1;
+    unsigned char GPIO_PIN_13   : 1;
+    unsigned char GPIO_PIN_14   : 1;
+    unsigned char GPIO_PIN_15   : 1;
 } GPIOG; 
 
 typedef struct {
     unsigned char GPIO_PIN_0    : 1;
     unsigned char GPIO_PIN_1    : 1;
     unsigned char SWITCH        : 5;
-    // unsigned char GPIO_PIN_2  : 1;
-    // unsigned char GPIO_PIN_3  : 1;
-    // unsigned char GPIO_PIN_4  : 1;
-    // unsigned char GPIO_PIN_5  : 1;
-    // unsigned char GPIO_PIN_6  : 1;
+//     unsigned char GPIO_PIN_2    : 1;
+//     unsigned char GPIO_PIN_3    : 1;
+//     unsigned char GPIO_PIN_4    : 1;
+//     unsigned char GPIO_PIN_5    : 1;
+//     unsigned char GPIO_PIN_6    : 1;
     unsigned char GPIO_PIN_7    : 1;
     unsigned char rem           : 8;
 } GPIOF;
@@ -211,8 +225,8 @@ void Uart_Init(int baud)
     UCON1 = 0x05;
 
     /* TODO : Baud rate ¼³Á¤  */        
-    UBRDIV1=0x22;
-    UDIVSLOT1=0xDFDD;
+    UBRDIV1 = 0x22;
+    UDIVSLOT1 = 0xDFDD;
 }
 
 void gpio_init(){
@@ -222,7 +236,7 @@ void gpio_init(){
     GPGCON.GP6 = OUTPUT;
     GPGCON.GP7 = OUTPUT;
 
-    GPGDAT.bit2 = (0xF);    
+    GPGDAT.LED = (0xF);    
 
     // KEY INIT
     GPFCON.GP0 = EINT;
@@ -285,21 +299,12 @@ void delay_ms(int ms){
 }
 
 void Main()
-{
-    int i = 0;
-    int delay = 1000000;
-    int key = 1;
-    int input = 0;
-    int oldkey = 0;
-
-    char num[3] ;
-    char RX_Buffer[512];
-
+{   
     gpio_init();
 
     // BUS INIT
     APBCLOCK = (0xFFFFFFFF);
-    //APBCLOCK = (0xFFF00001);
+    
     Uart_Init(115200);
 
     exti_init();
@@ -309,9 +314,9 @@ void Main()
     putstr("Program Started!!\r\n");
 
     while(1){
-        GPGDAT.bit2 = ~(0xF);
+        GPGDAT.LED = ~(0xF);
         delay_ms(1000);
-        GPGDAT.bit2 = (0xF);
+        GPGDAT.LED = (0xF);
         delay_ms(1000);
     }
 }
@@ -322,12 +327,12 @@ void  __attribute__((interrupt("IRQ"))) isr_eint_0(void)
 {
     ClearPending1(BIT_EINT0);
     putstr("e0\r\n");
-    GPGDAT.bit2 = ~swap(0x8);
+    GPGDAT.LED = ~swap(0x8);
 }
 
 void __attribute__((interrupt("IRQ"))) isr_eint_1(void)
 {
     ClearPending1(BIT_EINT1);
     putstr("e1\r\n");
-    GPGDAT.bit2 = ~swap(0x1);
+    GPGDAT.LED = ~swap(0x1);
 }
