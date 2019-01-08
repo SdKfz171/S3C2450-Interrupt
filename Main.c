@@ -244,7 +244,7 @@ void gpio_init(){
 
 void exti_init(){
     // Set Interrupt Mod to IRQ
-    rINTMOD = (0x0);
+    rINTMOD1 = (0x0);
         
     // Reset Interrupt Mask
     rINTMSK1 = BIT_ALLMSK;              // (0xffffffff)
