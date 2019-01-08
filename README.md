@@ -8,7 +8,7 @@ S3C2450 스타트업 코드에서의 인터럽트 부분 분석
 
     .equ _ISR_STARTADDRESS,		0x33ffff00    // ISR 시작 주소 
 
-![](Untitled-8ef6fd58-3648-4c75-b6e3-e6dabc848a6c.png)
+![](Image/Untitled-8ef6fd58-3648-4c75-b6e3-e6dabc848a6c.png)
 
     /* ResetHandler가 처음부터 나오는 것이 아니라 
     	 * vector 주소 영역에는 reset vector가 존재해야 한다
