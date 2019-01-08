@@ -47,14 +47,13 @@ HANDLER 매크로 함수
 4. r0에 r0의 값(HandleIRQ의 값)을 로드한다.
 5. r0를 스택포인터에 4를 증가시킨 곳에 저장한다.
 6. 저장 해 둔 r0의 값을 읽어오고 프로그램 카운터의 핸들러의 값을 넣어, 핸들러로 점프한다.
-
-    HANDLER HandlerFIQ, HandleFIQ
+<pre><code>    HANDLER HandlerFIQ, HandleFIQ
     HANDLER HandlerIRQ, HandleIRQ
     HANDLER HandlerUndef, HandleUndef
     HANDLER HandlerSWI, HandleSWI
     HANDLER HandlerDabort, HandleDabort
     HANDLER HandlerPabort, HandlePabort
-
+</code></pre>
 HandlerIRQ와 HandleIRQ를 인자로 HANDLER 매크로 실행 ⇒ HandleIRQ를 핸들러로 사용하게 된다.
 
     /* 여기서 IRQ가 발생할때 위에서 만든 
@@ -97,8 +96,7 @@ IRQ 핸들러를 생성하고 전역으로 선언한다
 7. r8에 r8의 값을 로드한다,
 8. 스택포인터에서 8만큼(스택 2칸) 증가 시킨 곳(처음에 만든 빈공간)에 r8을 저장한다.
 9. 데이터를 로드하면서 스택 포인터를 증가  저장해둔 r8, r9의 값을 읽어오고 8에서 저장해둔 ISR의 주소를 프로그램 카운터에 넣어줌으로써 ISR로 점프한다.
-
-    //; .=0x33ffff00
+<pre><code>    //; .=0x33ffff00
     //HandleReset 	#   4
     //HandleUndef 	#   4
     //HandleSWI		#   4
@@ -154,7 +152,7 @@ IRQ 핸들러를 생성하고 전역으로 선언한다
     //
     //	END 
     */
-
+</code></pre>
 0x33FFFF00 ~ 0x33FFFF1C : 예외 벡터 테이블, 0x33FFFF20 ~ 0x33FFFFA0 : 인터럽트 벡터 테이블
 
 스타트업 코드에서의 전체적인 순서
