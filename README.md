@@ -170,7 +170,7 @@ IRQ 핸들러를 생성하고 전역으로 선언한다
 
 # Main.c
 
-![](S3C2450_UM_REV11-beeeee99-d771-4e48-b365-754ea41e3456.30_20090305.pdf-AdobeAcrobatReaderDC1_7_20194_36_58PM(2).png)
+![](Image/S3C2450_UM_REV11-beeeee99-d771-4e48-b365-754ea41e3456.30_20090305.pdf-AdobeAcrobatReaderDC1_7_20194_36_58PM(2).png)
 
 S3C2450의 인터럽트 프로세싱 다이어그램
 
@@ -180,17 +180,17 @@ S3C2450의 인터럽트 프로세싱 다이어그램
 
 SUBSRCPND 레지스터
 
-![](SUBSRCPND-c7c9f9ce-055c-4f71-9263-97efbd7e575e.PNG)
+![](Image/SUBSRCPND-c7c9f9ce-055c-4f71-9263-97efbd7e575e.PNG)
 
-![](SUBSRCPND_-8e59f364-0e97-44e4-adb2-48a06da0c0aa.PNG)
+![](Image/SUBSRCPND_-8e59f364-0e97-44e4-adb2-48a06da0c0aa.PNG)
 
 서브 소스 펜딩 레지스터에는 UART 인터럽트의 TX 서브 인터럽트, RX 서브 인터럽트 등과 같이 세부 인터럽트의 펜딩 값이 있다.
 
 INTSUBMSK 레지스터
 
-![](INTSUBMSK-4ae41794-0b11-4e07-aba3-83cab63b54f3.PNG)
+![](Image/INTSUBMSK-4ae41794-0b11-4e07-aba3-83cab63b54f3.PNG)
 
-![](INTSUBMSK_-433a7a46-5101-44f4-8c0b-58986ea9f013.PNG)
+![](Image/INTSUBMSK_-433a7a46-5101-44f4-8c0b-58986ea9f013.PNG)
 
 같은 느낌으로 INTSUBMASK에는 세부 인터럽트의 마스크 값이 있다.
 
@@ -198,9 +198,9 @@ INTSUBMSK 레지스터
 
 SRCPND 레지스터
 
-![](SRCPND-e4ceb96a-dfb7-400f-8e21-bda6b47cd7f6.PNG)
+![](Image/SRCPND-e4ceb96a-dfb7-400f-8e21-bda6b47cd7f6.PNG)
 
-![](SRCPND_-02dd7784-cc89-4ba2-bd2d-e2ff26cb7c0b.PNG)
+![](Image/SRCPND_-02dd7784-cc89-4ba2-bd2d-e2ff26cb7c0b.PNG)
 
 인터럽트 소스로 부터 요청이 있으면 해당 비트를 1로 세팅한다.
 
@@ -209,9 +209,9 @@ SRCPND 레지스터
 
 INTMOD 레지스터
 
-![](INTMOD-f6c52b1f-3ae7-458e-b2f7-6a7b2458434e.PNG)
+![](Image/INTMOD-f6c52b1f-3ae7-458e-b2f7-6a7b2458434e.PNG)
 
-![](INTMOD_-521850a2-0599-40df-bb9e-2e139a1ca2e8.PNG)
+![](Image/INTMOD_-521850a2-0599-40df-bb9e-2e139a1ca2e8.PNG)
 
 값이 0 이면 인터럽트의 모드를 IRQ로 세팅하고 1이면 FIQ로 세팅한다, 기본 값은 0
 
@@ -220,17 +220,17 @@ INTMOD 레지스터
 
 INTMSK 레지스터
 
-![](INTMSK-2d7a7c2c-a8d9-47d2-a78c-ed3099c0018c.PNG)
+![](Image/INTMSK-2d7a7c2c-a8d9-47d2-a78c-ed3099c0018c.PNG)
 
-![](INTMSK_-48f5a5dd-509c-4662-bcaa-99c79eff14c0.PNG)
+![](Image/INTMSK_-48f5a5dd-509c-4662-bcaa-99c79eff14c0.PNG)
 
 원하는 비트를 0으로 마스킹 해 주면 해당 비트의 인터럽트를 사용 가능, 기본값은 1 
 
 INTPND 레지스터
 
-![](INTPND-81b8a740-c9ec-43be-a9bd-63537ee24c96.PNG)
+![](Image/INTPND-81b8a740-c9ec-43be-a9bd-63537ee24c96.PNG)
 
-![](INTPND_-11cfcaeb-5ebb-4641-8e02-023f6659f716.PNG)
+![](Image/INTPND_-11cfcaeb-5ebb-4641-8e02-023f6659f716.PNG)
 
 인터럽트 서비스를 요청하면 1로 세팅 된다.
 
@@ -240,19 +240,19 @@ INTPND 레지스터
 
 EXTINT 레지스터
 
-![](EXTINT-9131a8bc-5a62-4fc2-8184-91ee0284b7c8.PNG)
+![](Image/EXTINT-9131a8bc-5a62-4fc2-8184-91ee0284b7c8.PNG)
 
-![](Extinct_-c37c003a-ef65-4d99-a0db-8ce8a9306fe1.PNG)
+![](Image/Extinct_-c37c003a-ef65-4d99-a0db-8ce8a9306fe1.PNG)
 
-![](Extinct_--4558e286-9a2a-49c0-8731-85538b0d8416.PNG)
+![](Image/Extinct_--4558e286-9a2a-49c0-8731-85538b0d8416.PNG)
 
-![](Extinct_---5cef8a6c-b309-451f-afbd-3e70a3c8db72.PNG)
+![](Image/Extinct_---5cef8a6c-b309-451f-afbd-3e70a3c8db72.PNG)
 
-![](Extinct_----4090a325-47b1-468a-a5fe-345f8e0154a4.PNG)
+![](Image/Extinct_----4090a325-47b1-468a-a5fe-345f8e0154a4.PNG)
 
 외부 인터럽트의 트리거를 설정하는 레지스터, 0x0은 Low Level, 0x1은 High Level, 0x2는 Falling Edge, 0x4는 Rising Edge, 0x6은 Both Edge
 
-![](Untitled-cacaacb8-7cc6-438e-bf79-6ca47b3160a6.png)
+![](Image/Untitled-cacaacb8-7cc6-438e-bf79-6ca47b3160a6.png)
 
 폴링 엣지는 클럭 펄스가 HIGH에서 LOW로 떨어 질 때 인터럽트가 발생하고
 
@@ -260,7 +260,7 @@ EXTINT 레지스터
 
 EINTMASK 레지스터
 
-![](EINTMASK-28c9371f-6ee6-4f6c-9e9d-6f771a426910.PNG)
+![](Image/EINTMASK-28c9371f-6ee6-4f6c-9e9d-6f771a426910.PNG)
 
 원하는 비트를 0으로 마스킹 해 주면 해당 비트의 외부 인터럽트를 사용 가능, 기본값은 1 
 
@@ -268,7 +268,7 @@ EINT0 ~ EINT3의 경우는 별도의 외부 인터럽트 마스킹이 불필요�
 
 EINTPEND 레지스터
 
-![](EINTPEND-ea5daac2-27bb-4c9e-a215-ad658376a848.PNG)
+![](Image/EINTPEND-ea5daac2-27bb-4c9e-a215-ad658376a848.PNG)
 
 INTPND와 동일하나 외부 인터럽트 한정이다.
 
