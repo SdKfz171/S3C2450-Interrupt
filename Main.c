@@ -33,14 +33,13 @@ typedef struct {
 typedef struct {
     unsigned char GPIO_PIN_0    : 1;
     unsigned char GPIO_PIN_1    : 1;
-    unsigned char SWITCH        : 5;
-//     unsigned char GPIO_PIN_2    : 1;
-//     unsigned char GPIO_PIN_3    : 1;
-//     unsigned char GPIO_PIN_4    : 1;
-//     unsigned char GPIO_PIN_5    : 1;
-//     unsigned char GPIO_PIN_6    : 1;
+    unsigned char GPIO_PIN_2    : 1;
+    unsigned char GPIO_PIN_3    : 1;
+    unsigned char GPIO_PIN_4    : 1;
+    unsigned char GPIO_PIN_5    : 1;
+    unsigned char GPIO_PIN_6    : 1;
     unsigned char GPIO_PIN_7    : 1;
-    unsigned char rem           : 8;
+    unsigned char res           : 8;
 } GPIOF;
 
 enum IO_MODE {
@@ -59,22 +58,22 @@ enum EXTI_MODE {
 };
 
 typedef struct {
-    unsigned char GP0   : 2;
-    unsigned char GP1   : 2;
-    unsigned char GP2   : 2;
-    unsigned char GP3   : 2;
-    unsigned char GP4   : 2;
-    unsigned char GP5   : 2;
-    unsigned char GP6   : 2;
-    unsigned char GP7   : 2;
-    unsigned char GP8   : 2;
-    unsigned char GP9   : 2;
-    unsigned char GP10  : 2;
-    unsigned char GP11  : 2;
-    unsigned char GP12  : 2;
-    unsigned char GP13  : 2;
-    unsigned char GP14  : 2;
-    unsigned char GP15  : 2;
+    unsigned char GPIO_PIN_0   : 2;
+    unsigned char GPIO_PIN_1   : 2;
+    unsigned char GPIO_PIN_2   : 2;
+    unsigned char GPIO_PIN_3   : 2;
+    unsigned char GPIO_PIN_4   : 2;
+    unsigned char GPIO_PIN_5   : 2;
+    unsigned char GPIO_PIN_6   : 2;
+    unsigned char GPIO_PIN_7   : 2;
+    unsigned char GPIO_PIN_8   : 2;
+    unsigned char GPIO_PIN_9   : 2;
+    unsigned char GPIO_PIN_10  : 2;
+    unsigned char GPIO_PIN_11  : 2;
+    unsigned char GPIO_PIN_12  : 2;
+    unsigned char GPIO_PIN_13  : 2;
+    unsigned char GPIO_PIN_14  : 2;
+    unsigned char GPIO_PIN_15  : 2;
 } GPCON;
 
 #define GPGCON    (*(volatile GPCON *)0x56000060)
@@ -231,19 +230,16 @@ void Uart_Init(int baud)
 
 void gpio_init(){
     // LED INIT
-    GPGCON.GP4 = OUTPUT;
-    GPGCON.GP5 = OUTPUT;
-    GPGCON.GP6 = OUTPUT;
-    GPGCON.GP7 = OUTPUT;
+    GPGCON.GPIO_PIN_4 = OUTPUT;
+    GPGCON.GPIO_PIN_5 = OUTPUT;
+    GPGCON.GPIO_PIN_6 = OUTPUT;
+    GPGCON.GPIO_PIN_7 = OUTPUT;
 
     GPGDAT.LED = (0xF);    
 
     // KEY INIT
-    GPFCON.GP0 = EINT;
-    GPFCON.GP1 = EINT;
-
-    GPFDAT.SWITCH = (0x00);
-    GPFDAT.GPIO_PIN_7 = (0x0);
+    GPFCON.GPIO_PIN_0 = EINT;
+    GPFCON.GPIO_PIN_1 = EINT;
 }
 
 void exti_init(){
