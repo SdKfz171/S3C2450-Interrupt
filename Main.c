@@ -243,28 +243,31 @@ void gpio_init(){
 }
 
 void exti_init(){
-    // External Interrupt Clear
-    rINTMSK1 = BIT_ALLMSK;
+    // Set Interrupt Mod to IRQ
+    rINTMOD = (0x0);
+        
+    // Reset Interrupt Mask
+    rINTMSK1 = BIT_ALLMSK;              // (0xffffffff)
 
-    // Source Pending Bit Clear
-    rSRCPND1 = BIT_EINT1;
-    rSRCPND1 |= BIT_EINT0;
+    // Clear Source Pending Bit 
+    rSRCPND1 = BIT_EINT1;               // (0x1<<1)
+    rSRCPND1 |= BIT_EINT0;              // (0x1)
 
-    // Interrupt Pending Bit Clear
-    rINTPND1 = BIT_EINT1;
-    rINTPND1 |= BIT_EINT0;
+    // Clear Interrupt Pending Bit 
+    rINTPND1 = BIT_EINT1;       
+    rINTPND1 |= BIT_EINT0;      
 
-    // Interrupt Mask Set
+    // Set Interrupt Mask
     rINTMSK1 = ~(BIT_EINT0 | BIT_EINT1);
 
-    // External Interrupt Edge Trigger Set
+    // Set External Interrupt Edge Trigger
     rEXTINT0 = (rEXTINT0 & ~(0x7 << 1)) | (FALLING_EDGE << 1);
     rEXTINT0 |= (rEXTINT0 & ~(0x7 << 0)) | (FALLING_EDGE << 0);
 
     // ISR    
-    pISR_EINT0 = (unsigned)isr_eint_0;
+    pISR_EINT0 = (unsigned)isr_eint_0; 
     pISR_EINT1 = (unsigned)isr_eint_1;
-    
+
 }
 
 void timer0_init(){
@@ -322,13 +325,13 @@ void Main()
 void  __attribute__((interrupt("IRQ"))) isr_eint_0(void)
 {
     ClearPending1(BIT_EINT0);
-    putstr("e0\r\n");
+    //putstr("e0\r\n");
     GPGDAT.LED = ~swap(0x8);
 }
 
 void __attribute__((interrupt("IRQ"))) isr_eint_1(void)
 {
     ClearPending1(BIT_EINT1);
-    putstr("e1\r\n");
+    //putstr("e1\r\n");
     GPGDAT.LED = ~swap(0x1);
 }
