@@ -380,6 +380,7 @@ GPGCON, GPFCON, GPGDAT, GPFDAT 레지스터를 비트필드 구조체로 선언�
     
     #define pISR_EINT0		(*(unsigned *)(_ISR_STARTADDRESS+0x20))
     #define pISR_EINT1		(*(unsigned *)(_ISR_STARTADDRESS+0x24))
+    #define pISR_EINT4_7	(*(unsigned *)(_ISR_STARTADDRESS+0x30))
     
     // Main.c
     enum EXTI_MODE {
@@ -393,28 +394,35 @@ GPGCON, GPFCON, GPGDAT, GPFDAT 레지스터를 비트필드 구조체로 선언�
     void exti_init(){
         // Set Interrupt Mod to IRQ
         rINTMOD1 = (0x0);
-            
+
         // Reset Interrupt Mask
         rINTMSK1 = BIT_ALLMSK;              // (0xffffffff)
-    
+
         // Clear Source Pending Bit 
-        rSRCPND1 = BIT_EINT1;               // (0x1<<1)
-        rSRCPND1 |= BIT_EINT0;              // (0x1)
-    
+        rSRCPND1 = BIT_EINT4_7 | BIT_EINT1 | BIT_EINT0;
+
         // Clear Interrupt Pending Bit 
-        rINTPND1 = BIT_EINT1;       
-        rINTPND1 |= BIT_EINT0;      
-    
+        rINTPND1 = BIT_EINT4_7 | BIT_EINT0 | BIT_EINT1;     
+
         // Set Interrupt Mask
-        rINTMSK1 = ~(BIT_EINT0 | BIT_EINT1);
-    
+        rINTMSK1 = ~(BIT_EINT4_7 | BIT_EINT0 | BIT_EINT1);
+
         // Set External Interrupt Edge Trigger
-        rEXTINT0 = (rEXTINT0 & ~(0x7 << 1)) | (FALLING_EDGE << 1);
+        rEXTINT0 = (rEXTINT0 & ~(0x7 << 5)) | (FALLING_EDGE << 5); 
+        rEXTINT0 |= (rEXTINT0 & ~(0x7 << 4)) | (FALLING_EDGE << 4);
+        rEXTINT0 |= (rEXTINT0 & ~(0x7 << 1)) | (FALLING_EDGE << 1);
         rEXTINT0 |= (rEXTINT0 & ~(0x7 << 0)) | (FALLING_EDGE << 0);
-    
+
+        // Clear External Interrupt Pending Bit
+        rEINTPEND = (0x3 << 4);
+
+        // Set External Interrupt MAsk
+        rEINTMASK = (0xFFFFC << 4);
+
         // ISR    
         pISR_EINT0 = (unsigned)isr_eint_0; 
         pISR_EINT1 = (unsigned)isr_eint_1;
+        pISR_EINT4_7= (unsigned)isr_eint_4_7;
     
     }
 
@@ -454,6 +462,7 @@ GPGCON, GPFCON, GPGDAT, GPFDAT 레지스터를 비트필드 구조체로 선언�
     // Prototype
     void __attribute__((interrupt("IRQ"))) isr_eint_0(void);
     void __attribute__((interrupt("IRQ"))) isr_eint_1(void);
+    void __attribute__((interrupt("IRQ"))) isr_eint_4_7(void);
     
     // Handler
     void  __attribute__((interrupt("IRQ"))) isr_eint_0(void)
@@ -468,6 +477,18 @@ GPGCON, GPFCON, GPGDAT, GPFDAT 레지스터를 비트필드 구조체로 선언�
         ClearPending1(BIT_EINT1);
         // putstr("e1\r\n");
         GPGDAT.LED = ~swap(0x1);
+    }
+    
+    void __attribute__((interrupt("IRQ"))) isr_eint_4_7(void){
+        ClearPending1(BIT_EINT4_7);
+        if(rEINTPEND & (0x1 <<4)){
+            rEINTPEND = 0x1 << 4;
+            GPGDAT.LED = ~swap(0x4);    
+        }
+        if(rEINTPEND & (0x1 <<5)){
+            rEINTPEND = 0x1 << 5;
+            GPGDAT.LED = ~swap(0x5);    
+        }
     }
 
 레지스터 부분에서 설명 했듯이 펜딩비트를 수동으로 클리어 해주지 않으면 ISR이 반복 실행 되기 때문에 처음에 펜딩비트를 클리어 해 주어야한다.
